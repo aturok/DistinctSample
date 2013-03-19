@@ -33,6 +33,7 @@ namespace DistinctSample
     {
         public bool Equals(MovieActor x, MovieActor y)
         {
+            Console.WriteLine("Equals called on " + x.ToString() + " " + y.ToString());
             return
                 x.LastName == y.LastName &&
                 x.FirstName == y.FirstName &&
@@ -41,6 +42,7 @@ namespace DistinctSample
 
         public int GetHashCode(MovieActor obj)
         {
+            Console.WriteLine("Hash called on " + obj.ToString() + " (" + obj.GetHashCode() + ")");
             return obj.GetHashCode();
         }
     }
@@ -52,7 +54,7 @@ namespace DistinctSample
             var actors = MovieActor.CreateSome();
             actors.Add(new MovieActor() { FirstName = "George", LastName = "Clooney", CharacterName = "Dany"});
 
-            Console.WriteLine(String.Format("{0} total actors.", actors.Count()));
+            Console.WriteLine(String.Format("{0} actors total.", actors.Count()));
 
             var distinct = actors.Distinct(new ActorComparer());
             Console.WriteLine(String.Format("\n{0} distinct actors.", distinct.Count()));
