@@ -17,7 +17,7 @@ namespace DistinctSample
             return String.Format("{0} \"{1}\" {2}", FirstName, CharacterName, LastName);
         }
 
-        public static IEnumerable<MovieActor> CreateSome()
+        public static List<MovieActor> CreateSome()
         {
             return new List<MovieActor>()
             {
@@ -33,10 +33,17 @@ namespace DistinctSample
     {
         static void Main(string[] args)
         {
-            var numbers = new int[] { 1, 2, 3, 2, 5, 5, 3 };
-            foreach (var n in numbers.Distinct())
+            var actors = MovieActor.CreateSome();
+            actors.Add(actors[2]);
+
+            Console.WriteLine(String.Format("{0} total actors.", actors.Count()));
+
+            var distinct = actors.Distinct();
+            Console.WriteLine(String.Format("\n{0} distinct actors.", distinct.Count()));
+
+            foreach (var actor in distinct)
             {
-                Console.WriteLine(n);
+                Console.WriteLine(actor);
             }
             
             Console.ReadLine();
