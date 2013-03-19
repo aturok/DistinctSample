@@ -33,7 +33,7 @@ namespace DistinctSample
     {
         public bool Equals(MovieActor x, MovieActor y)
         {
-            Console.WriteLine("\tEquals called on " + x.ToString() + " " + y.ToString());
+            Console.WriteLine("\tEquals called on " + x.ToString() + " vs " + y.ToString());
             return
                 x.LastName == y.LastName &&
                 x.FirstName == y.FirstName &&
@@ -43,7 +43,7 @@ namespace DistinctSample
         public int GetHashCode(MovieActor obj)
         {
             Console.WriteLine("\tHash called on " + obj.ToString() + " (" + obj.GetHashCode() + ")");
-            return (obj.FirstName + obj.LastName + obj.CharacterName).GetHashCode();
+            return obj.LastName.GetHashCode();
         }
     }
 
