@@ -24,7 +24,7 @@ namespace DistinctSample
                 new MovieActor() { FirstName = "Brad", LastName = "Pitt", CharacterName = "Rusty"},
                 new MovieActor() { FirstName = "Andy", LastName = "Garcia", CharacterName = "Terry"},
                 new MovieActor() { FirstName = "George", LastName = "Clooney", CharacterName = "Dany"},
-                new MovieActor() { FirstName = "Jullia", LastName = "Roberts", CharacterName = "Tess"}
+                new MovieActor() { FirstName = "Julia", LastName = "Roberts", CharacterName = "Tess"}
             };
         }
     }
@@ -34,7 +34,7 @@ namespace DistinctSample
         static void Main(string[] args)
         {
             var actors = MovieActor.CreateSome();
-            actors.Add(actors[2]);
+            actors.Add(new MovieActor() { FirstName = "George", LastName = "Clooney", CharacterName = "Dany"});
 
             Console.WriteLine(String.Format("{0} total actors.", actors.Count()));
 
