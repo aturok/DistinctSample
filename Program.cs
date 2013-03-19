@@ -29,6 +29,22 @@ namespace DistinctSample
         }
     }
 
+    class ActorComparer : IEqualityComparer<MovieActor>
+    {
+        public bool Equals(MovieActor x, MovieActor y)
+        {
+            return
+                x.LastName == y.LastName &&
+                x.FirstName == y.FirstName &&
+                x.CharacterName == y.CharacterName;
+        }
+
+        public int GetHashCode(MovieActor obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -38,7 +54,7 @@ namespace DistinctSample
 
             Console.WriteLine(String.Format("{0} total actors.", actors.Count()));
 
-            var distinct = actors.Distinct();
+            var distinct = actors.Distinct(new ActorComparer());
             Console.WriteLine(String.Format("\n{0} distinct actors.", distinct.Count()));
 
             foreach (var actor in distinct)
