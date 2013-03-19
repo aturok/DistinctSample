@@ -43,7 +43,7 @@ namespace DistinctSample
         public int GetHashCode(MovieActor obj)
         {
             Console.WriteLine("\tHash called on " + obj.ToString() + " (" + obj.GetHashCode() + ")");
-            return obj.LastName.GetHashCode();
+            return 0;
         }
     }
 
