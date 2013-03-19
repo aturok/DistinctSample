@@ -33,11 +33,10 @@ namespace DistinctSample
     {
         static void Main(string[] args)
         {
-            var actors = MovieActor.CreateSome();
-            Console.WriteLine(String.Format("{0} total players.", actors.Count()));
-            foreach (var actor in actors)
+            var numbers = new int[] { 1, 2, 3, 2, 5, 5, 3 };
+            foreach (var n in numbers.Distinct())
             {
-                Console.WriteLine(actor);
+                Console.WriteLine(n);
             }
             
             Console.ReadLine();
