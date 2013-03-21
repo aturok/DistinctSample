@@ -24,7 +24,8 @@ namespace DistinctSample
                 new MovieActor() { FirstName = "Brad", LastName = "Pitt", CharacterName = "Rusty"},
                 new MovieActor() { FirstName = "Andy", LastName = "Garcia", CharacterName = "Terry"},
                 new MovieActor() { FirstName = "George", LastName = "Clooney", CharacterName = "Dany"},
-                new MovieActor() { FirstName = "Julia", LastName = "Roberts", CharacterName = "Tess"}
+                new MovieActor() { FirstName = "Julia", LastName = "Roberts", CharacterName = "Tess"},
+                new MovieActor() { FirstName = "Julia", LastName = "Roberts", CharacterName = "Julia Roberts"}
             };
         }
     }
@@ -58,7 +59,7 @@ namespace DistinctSample
             
             Console.WriteLine(String.Format("{0} actors total.", actors.Count()));
 
-            var distinct = actors.Distinct(new ActorComparer(a => new { a.LastName, a.FirstName }));
+            var distinct = actors.Distinct(new ActorComparer(a => new { a.LastName, a.FirstName, a.CharacterName }));
             
             foreach (var actor in distinct)
             {
