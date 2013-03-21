@@ -30,21 +30,21 @@ namespace DistinctSample
         }
     }
 
-    class ActorComparer : IEqualityComparer<MovieActor>
+    class ByKeyEqualityComparer<T> : IEqualityComparer<T>
     {
-        public Func<MovieActor, object> KeySelector { get; set; }
+        public Func<T, object> KeySelector { get; set; }
 
-        public bool Equals(MovieActor x, MovieActor y)
+        public bool Equals(T x, T y)
         {
             return KeySelector(x).Equals(KeySelector(y));
         }
 
-        public int GetHashCode(MovieActor obj)
+        public int GetHashCode(T obj)
         {
             return KeySelector(obj).GetHashCode();
         }
 
-        public ActorComparer(Func<MovieActor, object> keySelector)
+        public ByKeyEqualityComparer(Func<T, object> keySelector)
         {
             KeySelector = keySelector;
         }
@@ -59,7 +59,7 @@ namespace DistinctSample
             
             Console.WriteLine(String.Format("{0} actors total.", actors.Count()));
 
-            var distinct = actors.Distinct(new ActorComparer(a => new { a.LastName, a.FirstName, a.CharacterName }));
+            var distinct = actors.Distinct(new ByKeyEqualityComparer<MovieActor>(a => new { a.LastName, a.FirstName, a.CharacterName }));
             
             foreach (var actor in distinct)
             {
