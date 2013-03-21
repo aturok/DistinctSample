@@ -58,7 +58,7 @@ namespace DistinctSample
             
             Console.WriteLine(String.Format("{0} actors total.", actors.Count()));
 
-            var distinct = actors.Distinct(new ActorComparer(a => a.LastName));
+            var distinct = actors.Distinct(new ActorComparer(a => new { a.LastName, a.FirstName }));
             
             foreach (var actor in distinct)
             {
