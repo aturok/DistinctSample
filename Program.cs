@@ -65,8 +65,19 @@ namespace DistinctSample
             {
                 Console.WriteLine(actor);
             }
+
+            Console.WriteLine("\nGroup trick:");
+            foreach (var actor in DistinctWithGroup(actors))
+            {
+                Console.WriteLine(actor);
+            }
             
             Console.ReadLine();
+        }
+
+        static IEnumerable<MovieActor> DistinctWithGroup(IEnumerable<MovieActor> actors)
+        {
+            return actors.GroupBy(a => new { a.LastName, a.FirstName, a.CharacterName }).Select(g => g.First());
         }
     }
 }
