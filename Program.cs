@@ -31,19 +31,21 @@ namespace DistinctSample
 
     class ActorComparer : IEqualityComparer<MovieActor>
     {
+        public Func<MovieActor, object> KeySelector { get; set; }
+
         public bool Equals(MovieActor x, MovieActor y)
         {
-            Console.WriteLine("\tEquals called on " + x.ToString() + " vs " + y.ToString());
-            return
-                x.LastName == y.LastName &&
-                x.FirstName == y.FirstName &&
-                x.CharacterName == y.CharacterName;
+            return KeySelector(x).Equals(KeySelector(y));
         }
 
         public int GetHashCode(MovieActor obj)
         {
-            Console.WriteLine("\tHash called on " + obj.ToString() + " (" + obj.GetHashCode() + ")");
-            return 0;
+            return KeySelector(obj).GetHashCode();
+        }
+
+        public ActorComparer(Func<MovieActor, object> keySelector)
+        {
+            KeySelector = keySelector;
         }
     }
 
@@ -53,10 +55,10 @@ namespace DistinctSample
         {
             var actors = MovieActor.CreateSome();
             actors.Add(new MovieActor() { FirstName = "George", LastName = "Clooney", CharacterName = "Dany"});
-
+            
             Console.WriteLine(String.Format("{0} actors total.", actors.Count()));
 
-            var distinct = actors.Distinct(new ActorComparer());
+            var distinct = actors.Distinct(new ActorComparer(a => a.LastName));
             
             foreach (var actor in distinct)
             {
